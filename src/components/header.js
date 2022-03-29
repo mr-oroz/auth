@@ -1,15 +1,15 @@
 import React from 'react';
 
 const Header = (props) => {
-    const {list, onChange, value} = props;
+    const {list, onChange, done, notDone} = props;
     return (
         <div style={{
             display: 'flex',
             flexDirection: 'column'
         }}>
             <h1>TODO List ({list})</h1>
-            <span>done: 0</span>
-            <span>not done: 0</span>
+            <span>done: {done}</span>
+            <span>not done: {notDone}</span>
             <select
                 onChange={onChange}
                 style={{width: '100px'}}>

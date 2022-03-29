@@ -7,7 +7,15 @@ const List = (props) => {
     return (
         <div>
             {
-                task.map((elem, index) => {
+                task.filter(elem => {
+                    if(value === 'all') {
+                        return elem
+                    } else if(value === 'done') {
+                        return elem.found
+                    } else if(value === 'not-done') {
+                        return  !elem.found
+                    }
+                }).map((elem, index) => {
                     return <ListItem
                         onCheck={() => onCheck(index)}
                         onDelete={() => onDelete(index)}

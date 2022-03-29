@@ -7,6 +7,7 @@ import './app.css';
 const App = () => {
     const getLocal = JSON.parse(localStorage.getItem('todo'))
     const [task, setTask] = useState(getLocal || []);
+    const [value, setValue] = useState('all');
     const onDelete  = (index) => {
         const item = task.findIndex((elem, idx) => idx === index);
         const before = task.slice(0, item)
@@ -14,7 +15,6 @@ const App = () => {
         const newArr = [...before, ...after]
         setTask(newArr)
     }
-    const [value, setValue] = useState('all');
 
     const onCheck = (index) => {
         const item = task.findIndex((elem, idx) => idx === index);
@@ -31,6 +31,7 @@ const App = () => {
     const list = task.length;
 
     const onChange = (e) => {
+        console.log(e.target.value)
         setValue(e.target.value)
     }
     const addTodo = (value) => {
@@ -41,9 +42,14 @@ const App = () => {
         const newArr = [...task, newItem]
         setTask(newArr)
     }
+
+    const done  = task.filter(elem => elem.found).length
+    const notDone  = task.filter(elem => !elem.found).length
     return (
         <div>
             <Header
+                done={done}
+                notDone={notDone}
                 onChange={onChange}
                 list={list}/>
             <AddTodo addTodo={addTodo}/>
