@@ -1,12 +1,10 @@
 import React from 'react';
 import Register from "./components/auth/register";
-import Login from "./components/auth/login";
-
+import './app.css'
 const App = () => {
     return (
         <div>
             <Register/>
-            <Login/>
         </div>
     );
 };
