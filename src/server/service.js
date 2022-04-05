@@ -1,23 +1,22 @@
-import axios from "axios";
-import Api_URL from "./api";
+import axios from 'axios';
 import Cookie from 'js-cookie'
-
 const instance = axios.create({
-    baseURL: Api_URL,
+    baseURL: 'https://nestjs-boilerplate-test.herokuapp.com/api/v1/auth/',
     headers: {
-        'Content-Type': 'application/json'
-    }
+        "Content-Type" : "application/json",
+    },
 })
 
 instance.interceptors.request.use((config) => {
-        const token = Cookie.get('swagger');
-        if (token) {
-            config.headers['Authorization'] = `Bearer ${token}`
-        }
-    }, (err) => {
-        return Promise.reject(err)
+    const token = Cookie.get('token');
+    if(token) {
+        config.headers["Authorization"] = `Bearer ${token}`;
     }
-)
+    return config
+}, (err) => {
+    return Promise.reject(err)
+})
+
 instance.interceptors.response.use((res) => {
     return res
 }, async (err) => {

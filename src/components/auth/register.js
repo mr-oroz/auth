@@ -1,17 +1,18 @@
 import React from 'react';
 import {useForm} from "react-hook-form";
-import Users from "../../server/aut-service";
+import authService from "../../server/aut-service";
 const Register = () => {
     const {register, formState: {errors}, reset, handleSubmit} = useForm();
 
     const onSubmit =  (state) => {
+        console.log('state', state)
         const data = {
             email: state.email,
             password: state.password,
             firstName: state.firstName,
             lastName: state.lastName
         }
-        Users(data).then(data => console.log(data))
+        authService.Users(data).then(data => console.log(data))
     }
 
     return (
