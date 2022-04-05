@@ -6,7 +6,7 @@ import {toast, ToastContainer} from 'react-toastify';
 const Register = () => {
     const {register, formState: {errors}, reset, handleSubmit} = useForm();
 
-    const onSubmit = (state) => {
+    const onSubmit = async (state) => {
         console.log('state', state)
         const data = {
             email: state.email,
@@ -14,7 +14,7 @@ const Register = () => {
             firstName: state.firstName,
             lastName: state.lastName
         }
-        authService.Users(data)
+      await authService.Users(data)
             .then(data => {
                 reset()
                 console.log(data)
